@@ -1,24 +1,29 @@
 import photo from '../../photos/landing-header.png';
-
+import '../../styles/homepage.css';
 function Landing() {
   return (
     <div className="Landing">
-      <header className="Landing-header">
-        <img src={photo} className="Landing-heading" alt="heading" />
-      </header>
-        <h1>Welcome to CoffeeChat!</h1>
+      <div className="background"> </div>
+      <div className="form-container">
+        <h1>Coffee Chat</h1>
+        <p hidden className="error">{"Invalid username or password input"} </p>
       <form>
+        <div className="form-group">
+          <label>
+            Username
+            <input type="text" name="name" placeholder="username"/>
+          </label>
+        </div>
+        <div className="form-group">
         <label>
-            Username:
-            <input type="text" name="name" />
+            Password
+            <input type='text' name='password' placeholder="password" />
         </label>
-        <label>
-            Password:
-            <input type='text' name='password' />
-        </label>
-        <input type="submit" value="Submit" />
+        </div>
+        <input  type="submit" value="Submit" />
+        <a className="sign-up" href=''>Sign Up </a>
       </form>
-    <a href=''>Sign Up </a>
+    </div>
     </div>
   );
 }

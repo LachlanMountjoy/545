@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'arl'; /*a name to be used later*/
+    src: url('../fonts/arlrdbd.ttf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'Aalto'; /*a name to be used later*/
+    src: url('../fonts/AaltoSansEssential-UltraLight.ttf'); /*URL to font*/
+}
+
+* {
+    margin: 0;
+}
+
+div .background{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding: 100px;
+    background-image: url("../photos/coffee.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(3px);
+
+}
+
+h1{
+    text-align: center;
+    margin-top: 50px;
+    color:white;
+    font-family: arl;
+    font-size: 60px;
+}
+
+div .error{
+    text-align: center;
+    margin-top: 50px;
+    color:red;
+}
+div .form-container{
+    position: absolute;
+    background-color: rgba(20, 0, 0, 0.3);
+    border-radius: 25px;
+    display: inline-block;
+    margin-top: 15%;
+    margin-bottom:15%;
+    margin-left: 35%;
+    margin-right:35%;
+    width: 30%;
+    height: 50%;
+
+}
+
+.form-container .form-group{
+    margin-bottom: 25px;
+    margin-top: 50px;
+    margin-left: 25%;
+    margin-right:25%;
+    width: 50%;
+}
+
+label{
+    color:white;
+    font-family: Aalto;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+input{
+    appearance: none;
+    background: none;
+    border:none;
+    outline: none;
+}
+
+
+input[type=text]{
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #F8F8F8;
+    border-radius:8px;
+}
+
+input[type=submit]{
+    margin-bottom:15px;
+    margin-left: 34%;
+    margin-right:10%;
+    color: white;
+    font-size:20px;
+    font-family: Aalto;
+    font-weight: bold;
+
+}
+
+.sign-up{
+    text-decoration: none;
+    color: white;
+    font-size: 19.5px;
+    font-family: Aalto;
+    font-weight: bold;
+}
