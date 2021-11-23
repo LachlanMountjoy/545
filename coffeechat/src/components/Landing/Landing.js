@@ -4,7 +4,6 @@ import '../../styles/homepage.css';
 import React from 'react';
 let signup_route = "http://127.0.0.1:8000/sign-up"
 let createUser = (username, password) => {
-  console.log("HELLO WORLD")
   axios.post(signup_route,
              {
                username: username,
@@ -14,6 +13,7 @@ let createUser = (username, password) => {
 function Landing() {
   function validate(username, passwd){
     // If username and passwd are on same userObject in DB, return true and display that User's Dashboard
+    
   }
 
   const [username, setUsername] = React.useState(null);
