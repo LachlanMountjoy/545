@@ -1,19 +1,20 @@
 import './App.css';
-import Landing from '../Landing/Landing.js';
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from "react-router-dom";
+
 import IceBreakers from '../IceBreakers/IceBreakers';
+import Landing from '../Landing/Landing.js';
+import Preferences from '../Preferences/Preferences';
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/landing">Landing</Link>
@@ -22,12 +23,13 @@ function App() {
               <Link to="/icebreakers">IceBreakers</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         {
           <Routes>
             <Route path="/landing" element={<Landing />} />
             <Route path="/icebreakers" element={<IceBreakers />} />
+            <Route path="/preferences" element={<Preferences />} />
           </Routes>
         }
       </div>

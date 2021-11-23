@@ -1,6 +1,10 @@
 import photo from '../../photos/landing-header.png';
 import '../../styles/homepage.css';
 function Landing() {
+  function validate(username, passwd){
+    // If username and passwd are on same userObject in DB, return true and display that User's Dashboard
+  }
+
   return (
     <div className="Landing">
       <div className="background"> </div>
