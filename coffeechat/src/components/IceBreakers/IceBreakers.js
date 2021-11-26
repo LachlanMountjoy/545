@@ -8,4 +8,4 @@ function IceBreakers() {
     );
   }
   
-  export default IceBreakers;
+export default IceBreakers;
