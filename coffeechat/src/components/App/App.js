@@ -27,6 +27,7 @@ function App() {
 
         {
           <Routes>
+            <Route path="/" element={<Landing />} />
             <Route path="/landing" element={<Landing />} />
             <Route path="/icebreakers" element={<IceBreakers />} />
             <Route path="/preferences" element={<Preferences />} />

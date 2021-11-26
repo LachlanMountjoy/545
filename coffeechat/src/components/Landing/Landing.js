@@ -14,8 +14,8 @@ let createUser = async (username, password, setError, navigate) => {
                password: password
              });
 
-  if (signup_result['Error']) {
-   setError(signup_result['Error']);
+  if (signup_result['data']['Error']) {
+   setError(signup_result['data']['Error']);
   } else {
     navigate('/preferences', { replace: true })
   }
@@ -29,8 +29,9 @@ let login = async (username, password, setError, navigate) => {
                username: username,
                password: password
              });
-  if (login_result['Error']) {
-   setError(login_result['Error']);
+  console.log(login_result)
+  if (login_result['data']['Error']) {
+   setError(login_result['data']['Error']);
   } else {
     navigate('/meetings', { replace: true })
   }
@@ -56,8 +57,8 @@ function Landing() {
       <form>
         <div className="form-group">
           <label>
-            Username
-            <input type="text" name="name" placeholder="username" onChange={e => setUsername(e.target.value)}/>
+            Email
+            <input type="text" name="name" placeholder="email" onChange={e => setUsername(e.target.value)}/>
           </label>
         </div>
         <div className="form-group">
@@ -66,9 +67,9 @@ function Landing() {
             <input type='text' name='password' placeholder="password" onChange={e => setPassword(e.target.value)}/>
         </label>
         </div>
-        <div className="sign-up" onClick={e => login(username, password, setError, navigate)}>Login</div>
+        <div className="login" onClick={e => login(username, password, setError, navigate)}>Login</div>
         <div className="sign-up" onClick={e => createUser(username, password, setError, navigate)}>Sign Up</div>
-        {(error) && <div><p> {error} </p> </div>}
+        {(error) && <div className='error'><p> {error} </p> </div>}
       </form>
     </div>
     </div>

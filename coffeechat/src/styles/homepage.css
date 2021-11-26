@@ -35,7 +35,11 @@ h1{
 div .error{
     text-align: center;
     margin-top: 50px;
+    border: 1px solid red;
+    background-color:#FFCCCC;
     color:red;
+    border-radius:8px;
+
 }
 div .form-container{
     position: absolute;
@@ -82,7 +86,7 @@ input[type=text]{
     border-radius:8px;
 }
 
-input[type=submit]{
+.login{
     margin-bottom:15px;
     margin-left: 34%;
     margin-right:10%;
@@ -90,7 +94,6 @@ input[type=submit]{
     font-size:20px;
     font-family: Aalto;
     font-weight: bold;
-
 }
 
 .sign-up{

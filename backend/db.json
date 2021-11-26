@@ -1,1 +1,1 @@
-{"id": 0, "users": {}}
+{"id": 1, "users": {"hello": {"password": "world", "id": 0, "name": "", "email": "", "prefences": [], "availability": [], "coffeeshops": [], "meetings": []}}}
