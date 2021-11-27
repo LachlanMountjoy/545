@@ -6,6 +6,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/sign-up', methods=['POST'])
 @cross_origin()
 def sign_up():
@@ -33,6 +34,7 @@ def sign_up():
         json.dump(db, f)
     return {'User': username, 'id': db['id']}
 
+
 @app.route('/login', methods=['POST'])
 @cross_origin()
 def login():
@@ -48,6 +50,7 @@ def login():
         return {'Error': 'Incorrect login credentials'}
     return {'User': username, 'id': db['id']}
 
+
 def is_compatible(user, person):
     user_prefs = set(user['preferences'])
     user_avail = set(user['availability'])
@@ -59,9 +62,23 @@ def is_compatible(user, person):
             and user_avail.union(person_avail)
             and user_coffeshops.union(person_coffeeshops))
 
-@app.route('/match-people')
-def match_people(user1, user2):
-    username = request.args.get('username')
+
+def create_meeting(meeting_id, user1, user2):
+    pref_union = set(user1['preferences']).union(set(user2['preferences']))
+    dates = list(set(user1['availability']).union(set(user2['availability'])))
+    coffeshops = list(set(user1['coffeshops']).union(set(user2['coffeshops'])))
+    return {
+        'id': meeting_id,
+        'people': [user1, user2],
+        'shared_preferences': list(pref_union),
+        'date': random.choice(dates),
+        'coffeeshop': random.choice(coffeshops)
+    }
+
+
+@app.route('/match-people/<username>')
+@cross_origin
+def match_people(username):
     with open('db.json', 'r') as f:
         db = json.load(f)
     user = db['users'][username]
@@ -86,17 +103,20 @@ def match_people(user1, user2):
         db = json.dump(db, f)
     return meeting
 
-def create_meeting(meeting_id, user1, user2):
-    pref_union = set(user1['preferences']).union(set(user2['preferences']))
-    dates = list(set(user1['availability']).union(set(user2['availability'])))
-    coffeshops = list(set(user1['coffeshops']).union(set(user2['coffeshops'])))
-    return {
-        'id': meeting_id,
-        'people': [user1, user2],
-        'shared_preferences': list(pref_union),
-        'date': random.choice(dates),
-        'coffeeshop': random.choice(coffeshops)
-    }
+
+@app.route('/get-meetings/<username>')
+@cross_origin
+def get_meetings(username):
+    with open('db.json', 'r') as f:
+        db = json.load(f)
+    meeting_ids = db['users'][username]['meetings']
+    meeting_details = []
+    for meeting_id in meeting_ids:
+        for meeting in db['meetings']:
+            if meeting['id'] == meeting_id:
+                meeting_details.append(meeting)
+    return meeting_details
+
 
 if __name__ == '__main__':
     app.run('127.0.0.1', port=8000, debug=True)
