@@ -77,7 +77,7 @@ def create_meeting(meeting_id, user1, user2):
 
 
 @app.route('/match-people/<username>')
-@cross_origin
+@cross_origin()
 def match_people(username):
     with open('db.json', 'r') as f:
         db = json.load(f)
@@ -105,7 +105,7 @@ def match_people(username):
 
 
 @app.route('/get-meetings/<username>')
-@cross_origin
+@cross_origin()
 def get_meetings(username):
     with open('db.json', 'r') as f:
         db = json.load(f)
