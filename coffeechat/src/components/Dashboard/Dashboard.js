@@ -22,19 +22,19 @@ function Dashboard({userObject}){
         return (
             // Iterate over the userObject's meeting field to display all the meetings for a User
             <div className="Meetings">
-            {meetings.map(meeting => 
+                {meetings.map(meeting => 
                 (<div className="individualMeeting">
-                <h1>Meeting {meeting.id}</h1>
+                <h2>Meeting {meeting.id}</h2>
                 <h2>Date: {meeting.date}</h2>
                 <h2>Location: {meeting.coffeeshop}</h2>
                 <p>People Involved:</p>
                 <ul>
-                {meetings.people.map(person =>
+                {meeting.people.map(person =>
                     <li>{person}</li>)}
                 </ul>
                 <p>Common Preferences:</p>
                 <ul>
-                {meetings.shared_preferences.map(preference =>
+                {meeting.shared_preferences.map(preference =>
                     <li>{preference}</li>)}
                 </ul>
                 </div>))}
