@@ -1,1 +1,1 @@
-{"id": 1, "users": {"hello": {"password": "world", "id": 0, "name": "", "email": "", "prefences": [], "availability": [], "coffeeshops": [], "meetings": []}}}
+{"id": 2, "users": {"hello": {"password": "world", "id": 0, "name": "", "email": "", "prefences": [], "availability": [], "coffeeshops": [], "meetings": []}, "john": {"username": "john", "password": "doe", "id": 1, "name": "", "email": "", "prefences": [], "availability": {}, "coffeeshops": [], "meetings": []}}}
