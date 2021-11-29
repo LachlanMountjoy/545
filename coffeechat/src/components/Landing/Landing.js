@@ -72,11 +72,11 @@ function Landing({setUserObject}) {
         </div>
         <div className="login">
         <label>
-          <Button variant="contained" onClick={e => login(username, password, setError, navigate)}>Login</Button>
+          <Button variant="contained" onClick={e => login(username, password, setError, navigate, setUserObject)}>Login</Button>
         </label>
         </div>
         <div className="sign-up">
-          <Button variant="contained" onClick={e => createUser(username, password, setError, navigate)}>Sign Up</Button>
+          <Button variant="contained" onClick={e => createUser(username, password, setError, navigate, setUserObject)}>Sign Up</Button>
         </div>
         {(error) && <div className='error'><p> {error} </p> </div>}
       </form>
