@@ -1,5 +1,6 @@
 import '../../styles/preferences.css';
 import {preferences} from '../../preferences.json';
+import Checkbox from '@mui/material/Checkbox'
 function Preferences() {
     return (
         <div>

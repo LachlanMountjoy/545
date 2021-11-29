@@ -1,18 +1,76 @@
 {
     "preferences": [
-        "Movies",
-        "Video Games",
-        "Sports",
-        "Music",
-        "Photography",
-        "Art",
-        "Travelling",
-        "Cooking",
-        "Volunteering",
-        "Board Games",
-        "Gardening",
-        "TV Shows",
-        "Drawing",
-        "Exercise"
+        {"Movies": [
+            "Marvel",
+            "Romantic Comedy",
+            "Historical",
+            "Other"
+        ]},
+        {"Video Games": [
+            "Action and Adventure",
+            "Shooters/MOBA",
+            "Party games",
+            "Other"
+        ]},
+        {"Sports": [
+            "Team (Basketball, Football)",
+            "Individual (Track & Field, Swimming)",
+            "Olympics"
+        ]},
+        {"Music": [
+            "Pop",
+            "Rap",
+            "RnB",
+            "Country",
+            "Other"
+        ]},
+        {"Photography": [
+            "Places",
+            "People"
+        ]},
+        {"Art": [
+            "Sculptures",
+            "Paintings",
+            "Drawings"
+        ]},
+        {"Travelling": [
+            "In the U.S.",
+            "Across the globe"
+        ]},
+        {"Cooking": [
+            "DIY",
+            "Gourmet Recipes"
+        ]},
+        {"Volunteering": [
+            "Red Cross",
+            "Community Service"
+        ]},
+        {"Board Games": [
+            "Monopoly",
+            "Settlers of Catan",
+            "Ticket to Ride",
+            "Other"
+        ]},
+        {"Gardening": [
+            "Flowers",
+            "Trees",
+            "Other"            
+        ]},
+        {"TV Shows": [
+            "Documentaries",
+            "K-Drama",
+            "Reality TV",
+            "Action",
+            "Other"
+        ]},
+        {"Drawing": [
+            "Coloring",
+            "Sketching"            
+        ]},
+        {"Exercise": [
+            "Lifting",
+            "Running",
+            "Athletics (sports)"
+        ]}
     ]
 }
