@@ -86,6 +86,13 @@ input[type=text]{
     border-radius:8px;
 }
 
+input[type=password]{
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #F8F8F8;
+    border-radius:8px;
+}
+
 .login{
     margin-bottom:15px;
     margin-left: 34%;
