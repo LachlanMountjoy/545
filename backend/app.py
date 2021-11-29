@@ -28,7 +28,7 @@ def sign_up():
         'id': db['id'],
         'name': '',
         'email': '',
-        'prefences': [],
+        'prefernces': [],
         'availability': {},
         'coffeeshops': [],
         'meetings': []
