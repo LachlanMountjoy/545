@@ -1,6 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,18 +13,17 @@ import Preferences from '../Preferences/Preferences';
 import Dashboard from '../Dashboard/Dashboard';
 
 function App() {
-  const [userObject, updateUser] = useState(0);
-
+  let [userObject, updateUser] = useState({});
   return (
     <Router>
       <div>
         {
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/landing" element={<Landing />} />
-            <Route path="/icebreakers" element={<IceBreakers />} />
-            <Route path="/preferences" element={<Preferences />} />
-            <Route path="/meetings" element={<Dashboard userObject = {userObject} />} />
+            <Route path="/" element={<Landing  setUserObject={updateUser}/>} />
+            <Route path="/landing" element={<Landing setUserObject={updateUser}/>} />
+            <Route path="/icebreakers" element={<IceBreakers userObject={userObject}/>} />
+            <Route path="/preferences" element={<Preferences userObject={userObject}/>} />
+            <Route path="/meetings" element={<Dashboard userObject={userObject}/>} />
           </Routes>
         }
       </div>
