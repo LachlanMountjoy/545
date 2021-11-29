@@ -116,7 +116,7 @@ def match_people(username):
                 recipients = people
     msg = MIMEMultipart()
     msg = "Hello! The details of your meeting are now available: localhost:127.0.0.1"
-    msg['Subject'] = 'The contents of %s' % textfile
+    msg['Subject'] = 'Your CoffeeChat Meeting is Ready!'
     msg['From'] = "stevenscoffeechat@gmail.com"
     msg['To'] = ",".join(recipients)
     s = smtplib.SMTP('localhost')
