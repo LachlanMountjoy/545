@@ -3,12 +3,12 @@ import axios from 'axios';
 
 let backendRoute = '127.0.0.1:8000/'
 let getMeeting = async (username) => {
-    let meetings = await axios.get(backendRoute + `get-meetings/${username}`,)
+    let meetings = await axios.get(backendRoute + `get-meetings/${username}`)['data']['meetings']
     return meetings
 }
 
 function Dashboard({userObject}){
-    let [meetings, setMeetings] = useState(0);
+    let [meetings, setMeetings] = useState([]);
     setMeetings(useEffect(() => getMeeting(userObject.username)));
     return (
         // Iterate over the userObject's meeting field to display all the meetings for a User
