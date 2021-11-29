@@ -2,7 +2,8 @@ import photo from '../../photos/landing-header.png';
 import axios from 'axios';
 import '../../styles/homepage.css';
 import React from 'react';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 let backend_route = "http://127.0.0.1:8000/"
 
@@ -67,8 +68,14 @@ function Landing() {
             <input type='text' name='password' placeholder="password" onChange={e => setPassword(e.target.value)}/>
         </label>
         </div>
-        <div className="login" onClick={e => login(username, password, setError, navigate)}>Login</div>
-        <div className="sign-up" onClick={e => createUser(username, password, setError, navigate)}>Sign Up</div>
+        <div className="login">
+        <label>
+          <Button variant="contained" onClick={e => login(username, password, setError, navigate)}>Login</Button>
+        </label>
+        </div>
+        <div className="sign-up">
+          <Button variant="contained" onClick={e => createUser(username, password, setError, navigate)}>Sign Up</Button>
+        </div>
         {(error) && <div className='error'><p> {error} </p> </div>}
       </form>
     </div>
