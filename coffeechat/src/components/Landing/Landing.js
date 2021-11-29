@@ -39,10 +39,6 @@ let login = async (username, password, setError, navigate) => {
 }
 
 function Landing() {
-  function validate(username, passwd){
-    // If username and passwd are on same userObject in DB, return true and display that User's Dashboard
-    
-  }
 
   const [username, setUsername] = React.useState(null);
   const [password, setPassword] = React.useState(null);
