@@ -115,7 +115,7 @@ def get_meetings(username):
         for meeting in db['meetings']:
             if meeting['id'] == meeting_id:
                 meeting_details.append(meeting)
-    return meeting_details
+    return {'meetings': meeting_details}
 
 
 if __name__ == '__main__':

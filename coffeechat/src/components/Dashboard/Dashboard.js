@@ -7,9 +7,8 @@ let getMeeting = async (username) => {
     return meetings
 }
 
-function Dashboard({userObject}){
-    let [meetings, setMeetings] = useState([]);
-    setMeetings(useEffect(() => getMeeting(userObject.username)));
+async function Dashboard({userObject}){
+    let meetings = await getMeeting(userObject['username'])
     return (
         // Iterate over the userObject's meeting field to display all the meetings for a User
         <div className="Meetings">
