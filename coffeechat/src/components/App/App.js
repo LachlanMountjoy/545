@@ -10,6 +10,8 @@ import {
 import IceBreakers from '../IceBreakers/IceBreakers';
 import Landing from '../Landing/Landing.js';
 import Preferences from '../Preferences/Preferences';
+import Dashboard from '../Dashboard/Dashboard';
+
 
 function App() {
   let [userObject, updateUser] = useState({});
@@ -33,6 +35,7 @@ function App() {
             <Route path="/landing" element={<Landing setUserObject={updateUser}/>} />
             <Route path="/icebreakers" element={<IceBreakers userObject={userObject}/>} />
             <Route path="/preferences" element={<Preferences userObject={userObject}/>} />
+            <Route path="/meetings" element={<Dashboard userObject={userObject}/>} />
           </Routes>
         }
       </div>

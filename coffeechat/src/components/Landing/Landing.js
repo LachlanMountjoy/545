@@ -10,8 +10,8 @@ let createUser = async (username, password, setError, navigate, setUserObject) =
   let signup_route = backend_route + 'sign-up';
   let signup_result = await axios.post(signup_route,
              {
-               username: username,
-               password: password
+               'username': username,
+               'password': password
              });
 
   if (signup_result['data']['Error']) {
@@ -27,8 +27,8 @@ let login = async (username, password, setError, navigate, setUserObject) => {
   let login_route = backend_route + 'login';
   let login_result = await axios.post(login_route,
              {
-               username: username,
-               password: password
+               'username': username,
+               'password': password
              });
   console.log(login_result)
   if (login_result['data']['Error']) {

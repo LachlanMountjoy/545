@@ -8,6 +8,7 @@ let getMeeting = async (setMeetings, username) => {
 }
 
 function Dashboard({userObject}){
+    console.log(userObject)
     let [meetings, setMeetings] = useState(null);
     useEffect(() => {
         if(meetings === null) {
