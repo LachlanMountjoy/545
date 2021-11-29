@@ -2,6 +2,10 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import random
 import json
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 
 app = Flask(__name__)
 CORS(app)
@@ -117,6 +121,26 @@ def get_meetings(username):
                 meeting_details.append(meeting)
     return {'meetings': meeting_details}
 
+@app.route('/email/<meeting_id>')
+@cross_origin
+def send_email(meeting_id):
+    with open('db.json', 'r') as f:
+        db = json.load(f)
+    meeting_ids = db['users'][username]['meetings']
+    recipients = None
+    for meeting_id in meeting_ids:
+        for meeting in db['meetings']:
+            if meeting['id'] == meeting_id:
+                recipients = people
+
+    msg = MIMEMultipart()
+    msg = "Hello! The details of your meeting are now available: localhost:127.0.0.1"
+    msg['Subject'] = 'The contents of %s' % textfile
+    msg['From'] = "stevenscoffeechat@gmail.com"
+    msg['To'] = ",".join(recipients)
+    s = smtplib.SMTP('localhost')
+    s.sendmail(me, recipients, msg.as_string())
+    s.quit()
 
 if __name__ == '__main__':
     app.run('127.0.0.1', port=8000, debug=True)
