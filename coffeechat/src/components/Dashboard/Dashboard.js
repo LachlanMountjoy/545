@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-let backendRoute = '127.0.0.1:8000/'
+let backend_route = "http://127.0.0.1:8000/";
+
 let getMeeting = async (setMeetings, username) => {
-    let meetings = await axios.get(backendRoute + `get-meetings/${username}`)['data']['meetings']
-    setMeetings(meetings)
+    console.log('backend call: ' + backend_route + `get-meetings/${username}`);
+    let meetings = await axios.get(backend_route + `get-meetings/${username}`);
+    console.log(meetings);
+    setMeetings(meetings['data']['meetings']);
 }
 
 function Dashboard({userObject}){
     let [meetings, setMeetings] = useState(null);
     useEffect(() => {
-        if(meetings === null) {
+        if(meetings === null){
             getMeeting(setMeetings, userObject['username']);
         }
     }, [meetings, userObject])
-    
-    if(meetings==null){
+
+    if(meetings && meetings.length !== 0){
         return (
-            <div className="noMeetings">
-                <h1>Currently no meetings scheduled!</h1>
-            </div>
-        )
-    }
-    return (
-        // Iterate over the userObject's meeting field to display all the meetings for a User
-        <div className="Meetings">
+            // Iterate over the userObject's meeting field to display all the meetings for a User
+            <div className="Meetings">
             {meetings.map(meeting => 
                 (<div className="individualMeeting">
                 <h1>Meeting {meeting.id}</h1>
@@ -33,20 +30,20 @@ function Dashboard({userObject}){
                 <p>People Involved:</p>
                 <ul>
                 {meetings.people.map(person =>
-                    <li>{person}</li>
-                    )}
+                    <li>{person}</li>)}
                 </ul>
                 <p>Common Preferences:</p>
                 <ul>
                 {meetings.shared_preferences.map(preference =>
-                    <li>{preference}</li>
-                    )}
+                    <li>{preference}</li>)}
                 </ul>
-
-                
                 </div>))}
-      </div>
-    );
+            </div>
+        );
+    }
+    else{
+        return (<div><p>Currently no meetings scheduled!</p></div>)
+    }
 }
 
 export default Dashboard;

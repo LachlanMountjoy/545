@@ -2,7 +2,8 @@ import photo from '../../photos/landing-header.png';
 import axios from 'axios';
 import '../../styles/homepage.css';
 import React from 'react';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 let backend_route = "http://127.0.0.1:8000/"
 
@@ -10,8 +11,8 @@ let createUser = async (username, password, setError, navigate, setUserObject) =
   let signup_route = backend_route + 'sign-up';
   let signup_result = await axios.post(signup_route,
              {
-               "username": username,
-               "password": password
+               'username': username,
+               'password': password
              });
 
   if (signup_result['data']['Error']) {
@@ -27,8 +28,8 @@ let login = async (username, password, setError, navigate, setUserObject) => {
   let login_route = backend_route + 'login';
   let login_result = await axios.post(login_route,
              {
-               username: username,
-               password: password
+               'username': username,
+               'password': password
              });
   console.log(login_result)
   if (login_result['data']['Error']) {
@@ -64,8 +65,14 @@ function Landing({setUserObject}) {
             <input type='text' name='password' placeholder="password" onChange={e => setPassword(e.target.value)}/>
         </label>
         </div>
-        <div className="login" onClick={e => login(username, password, setError, navigate, setUserObject)}>Login</div>
-        <div className="sign-up" onClick={e => createUser(username, password, setError, navigate, setUserObject)}>Sign Up</div>
+        <div className="login">
+        <label>
+          <Button variant="contained" onClick={e => login(username, password, setError, navigate, setUserObject)}>Login</Button>
+        </label>
+        </div>
+        <div className="sign-up">
+          <Button variant="contained" onClick={e => createUser(username, password, setError, navigate, setUserObject)}>Sign Up</Button>
+        </div>
         {(error) && <div className='error'><p> {error} </p> </div>}
       </form>
     </div>
