@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 
 let backend_route = "http://127.0.0.1:8000/"
 
-let createUser = async (username, password, setError, navigate) => {
+let createUser = async (username, password, setError, navigate, setUserObject) => {
   let signup_route = backend_route + 'sign-up';
   let signup_result = await axios.post(signup_route,
              {
@@ -18,11 +18,12 @@ let createUser = async (username, password, setError, navigate) => {
   if (signup_result['data']['Error']) {
    setError(signup_result['data']['Error']);
   } else {
+    setUserObject({'username': username})
     navigate('/preferences', { replace: true })
   }
 }
 
-let login = async (username, password, setError, navigate) => {
+let login = async (username, password, setError, navigate, setUserObject) => {
 
   let login_route = backend_route + 'login';
   let login_result = await axios.post(login_route,
@@ -34,12 +35,13 @@ let login = async (username, password, setError, navigate) => {
   if (login_result['data']['Error']) {
    setError(login_result['data']['Error']);
   } else {
+    setUserObject({'username': username})
     navigate('/meetings', { replace: true })
   }
 
 }
 
-function Landing() {
+function Landing({setUserObject}) {
   function validate(username, passwd){
     // If username and passwd are on same userObject in DB, return true and display that User's Dashboard
     
