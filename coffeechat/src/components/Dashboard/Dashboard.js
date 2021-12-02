@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import NavBar from '../NavBar/NavBar.js';
+
 
 let backend_route = "http://127.0.0.1:8000/";
 
@@ -21,28 +23,31 @@ function Dashboard({userObject}){
     if(meetings && meetings.length !== 0){
         return (
             // Iterate over the userObject's meeting field to display all the meetings for a User
-            <div className="Meetings">
-                {meetings.map(meeting => 
-                (<div className="individualMeeting">
-                <h2>Meeting {meeting.id}</h2>
-                <h2>Date: {meeting.date}</h2>
-                <h2>Location: {meeting.coffeeshop}</h2>
-                <p>People Involved:</p>
-                <ul>
-                {meeting.people.map(person =>
-                    <li>{person}</li>)}
-                </ul>
-                <p>Common Preferences:</p>
-                <ul>
-                {meeting.shared_preferences.map(preference =>
-                    <li>{preference}</li>)}
-                </ul>
-                </div>))}
+            <div>
+                <NavBar />
+                <div className="Meetings">
+                    {meetings.map(meeting => 
+                    (<div className="individualMeeting">
+                    <h2>Meeting {meeting.id}</h2>
+                    <h2>Date: {meeting.date}</h2>
+                    <h2>Location: {meeting.coffeeshop}</h2>
+                    <p>People Involved:</p>
+                    <ul>
+                    {meeting.people.map(person =>
+                        <li>{person}</li>)}
+                    </ul>
+                    <p>Common Preferences:</p>
+                    <ul>
+                    {meeting.shared_preferences.map(preference =>
+                        <li>{preference}</li>)}
+                    </ul>
+                    </div>))}
+                </div>
             </div>
         );
     }
     else{
-        return (<div><p>Currently no meetings scheduled!</p></div>)
+        return (<div><NavBar /><p>Currently no meetings scheduled!</p></div>)
     }
 }
 

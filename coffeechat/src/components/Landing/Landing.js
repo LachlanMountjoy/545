@@ -4,6 +4,7 @@ import '../../styles/homepage.css';
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import Button from '@mui/material/Button';
+import NavBar from '../NavBar/NavBar.js';
 
 let backend_route = "http://127.0.0.1:8000/"
 
@@ -49,6 +50,7 @@ function Landing({setUserObject}) {
   return (
     <div className="Landing">
       <div className="background"> </div>
+      <NavBar />
       <div className="form-container">
         <h1>Coffee Chat</h1>
         <p hidden className="error">{"Invalid username or password input"} </p>

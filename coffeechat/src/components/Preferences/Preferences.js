@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import {useState, useEffect} from 'react';
 import axios from 'axios'
+import NavBar from '../NavBar/NavBar.js';
 
 let backend_route = "http://127.0.0.1:8000/"
 
@@ -61,9 +62,9 @@ function Preferences({userObject}) {
         return f;
     }
     const keys = Object.keys(preferences);
-    
     return (
         <div>
+            <NavBar />
             <FormGroup>
             <div className="Preferences">
                 {keys.map(key =>
