@@ -44,6 +44,7 @@ function Preferences({userObject}) {
         return f;
     }
     const keys = Object.keys(preferences);
+    const checks = [<Checkbox />, <Checkbox defaultChecked />]
     return (
         <div>
             <FormGroup>
@@ -53,7 +54,7 @@ function Preferences({userObject}) {
                         <h2>{key} Options</h2>
                         
                         {preferences[key].map(option =>
-                            <FormControlLabel control={<Checkbox />} label = {option} onChange={updatePreference(option)}/>
+                            <FormControlLabel control={checks[preferenceState[option]]} label = {option} onChange={updatePreference(option)}/>
                             )}
                        
                     </div>)

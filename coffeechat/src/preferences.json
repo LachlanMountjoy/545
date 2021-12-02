@@ -3,14 +3,15 @@
         "Movies": [
             "Marvel",
             "Romantic Comedy",
-            "Historical",
-            "Other"
+            "Historical"
+            
         ],
         "Video Games": [
             "Action and Adventure",
-            "Shooters/MOBA",
-            "Party games",
-            "Other"
+            "Shooters",
+            "MOBA",
+            "Party games"
+            
         ],
         "Sports": [
             "Team (Basketball, Football)",
@@ -21,8 +22,7 @@
             "Pop",
             "Rap",
             "RnB",
-            "Country",
-            "Other"
+            "Country"
         ],
         "Photography": [
             "Places",
@@ -48,20 +48,17 @@
         "Board Games": [
             "Monopoly",
             "Settlers of Catan",
-            "Ticket to Ride",
-            "Other"
+            "Ticket to Ride"
         ],
         "Gardening": [
             "Flowers",
-            "Trees",
-            "Other"            
+            "Trees"           
         ],
         "TV Shows": [
             "Documentaries",
             "K-Drama",
             "Reality TV",
-            "Action",
-            "Other"
+            "Action"
         ],
         "Drawing": [
             "Coloring",
