@@ -1,6 +1,9 @@
 import '../../styles/preferences.css';
 import {preferences} from '../../preferences.json';
 import Checkbox from '@mui/material/Checkbox'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Button from '@mui/material/Button';
 import {useState} from 'react';
 import axios from 'axios'
 
@@ -16,35 +19,48 @@ let getPreferenceState = (preferencesObject) => {
     return preferenceState
 }
 
-let createUser = async (username, preferencesObject) => {
-    let signup_route = backend_route + 'save-prefernces';
-    let signup_result = await axios.post(signup_route,
+let savePreferences = async (username, preferenceState) => {
+    let save_route = backend_route + 'save-prefernces';
+    let save_result = await axios.post(save_route,
              {
                username: username,
-               preferences: preferencesObject
+               preferences: preferenceState
              });
+    return save_result
 }
 
-function Preferences() {
+
+function Preferences({userObject}) {
+    let username = userObject['username']
     let [preferenceState, setPreferenceState] = useState(getPreferenceState(preferences))
+    console.log(preferenceState);
     let updatePreference = (key) => {
         let f = () => {
             let newPreferenceState = {...preferenceState};
             newPreferenceState[key] = !newPreferenceState[key];
             setPreferenceState(newPreferenceState);
+            console.log(preferenceState)
         }
         return f;
     }
+    const keys = Object.keys(preferences);
     return (
         <div>
+            <FormGroup>
             <div className="Preferences">
-                {preferences.map((preference, index) => 
+                {keys.map(key =>
                     (<div>
-                        <input type="checkbox" id={"preference"+ index} name={"preference"+index} value={preference}/>
-                        {preference}
+                        <h2>{key} Options</h2>
+                        
+                        {preferences[key].map(option =>
+                            <FormControlLabel control={<Checkbox />} label = {option} onChange={updatePreference(option)}/>
+                            )}
+                       
                     </div>)
-                    )}
+                )}
             </div>
+            </FormGroup>
+            <Button onClick={() => {savePreferences(username, preferenceState)}}>Save</Button>
         </div>
     );
   }
