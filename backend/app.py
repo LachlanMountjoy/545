@@ -132,7 +132,7 @@ def get_meetings(username):
     return {'meetings': meeting_details}
 
 
-@app.route('/save-prefernces', methods=['POST'])
+@app.route('/save-preferences', methods=['POST'])
 @cross_origin()
 def save_preferences():
     username = request.json['username']

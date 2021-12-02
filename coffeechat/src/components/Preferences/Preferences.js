@@ -10,7 +10,7 @@ import axios from 'axios'
 let backend_route = "http://127.0.0.1:8000/"
 
 let getPreferenceState = async (preferencesObject, username) => {
-    let savedPreferencesRequest = axios.get(backend_route+username);
+    let savedPreferencesRequest = axios.get(backend_route+'save-preferences/'+username);
     let preferenceState = {};
     for(var key of Object.keys(preferencesObject)){
         for(var item of preferencesObject[key]){
