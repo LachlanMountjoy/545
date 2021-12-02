@@ -9,14 +9,19 @@ import axios from 'axios'
 
 let backend_route = "http://127.0.0.1:8000/"
 
-let getPreferenceState = (preferencesObject) => {
+let getPreferenceState = async (preferencesObject, username) => {
+    let savedPreferencesRequest = axios.get(backend_route+username);
     let preferenceState = {};
     for(var key of Object.keys(preferencesObject)){
         for(var item of preferencesObject[key]){
             preferenceState[item] = false;
         }
     }
-    return preferenceState
+    let savedPreferences = await savedPreferencesRequest;
+    for(var preference of savedPreferences){
+        preferenceState[preference] = true;
+    }
+    return preferenceState;
 }
 
 let savePreferences = async (username, preferenceState) => {
@@ -53,7 +58,7 @@ function Preferences({userObject}) {
                         <h2>{key} Options</h2>
                         
                         {preferences[key].map(option =>
-                            <FormControlLabel control={<Checkbox />} label = {option} onChange={updatePreference(option)}/>
+                            <FormControlLabel control={<Checkbox />} label = {option} onChange={updatePreference(option)} />
                             )}
                        
                     </div>)

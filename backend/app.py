@@ -146,5 +146,13 @@ def save_preferences():
     return {'Status': 'Success'}
 
 
+@app.route('/load-prefernces/<username>')
+@cross_origin()
+def load_preferences(username):
+    with open('db.json', 'r') as f:
+        db = json.load(f)
+    return {'preferences': db['users'][username]['preferences']}
+
+
 if __name__ == '__main__':
     app.run('127.0.0.1', port=8000, debug=True)
