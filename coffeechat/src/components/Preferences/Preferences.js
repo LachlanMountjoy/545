@@ -3,6 +3,7 @@ import {preferences} from '../../preferences.json';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
 
 function Preferences() {
     const keys = Object.keys(preferences);
@@ -22,6 +23,7 @@ function Preferences() {
                 )}
             </div>
             </FormGroup>
+            <Button onClick={() => {alert('preferences updated');}}>Save</Button>
         </div>
     );
   }
