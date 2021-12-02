@@ -1,76 +1,76 @@
 {
-    "preferences": [
-        {"Movies": [
+    "preferences": {
+        "Movies": [
             "Marvel",
             "Romantic Comedy",
             "Historical",
             "Other"
-        ]},
-        {"Video Games": [
+        ],
+        "Video Games": [
             "Action and Adventure",
             "Shooters/MOBA",
             "Party games",
             "Other"
-        ]},
-        {"Sports": [
+        ],
+        "Sports": [
             "Team (Basketball, Football)",
             "Individual (Track & Field, Swimming)",
             "Olympics"
-        ]},
-        {"Music": [
+        ],
+        "Music": [
             "Pop",
             "Rap",
             "RnB",
             "Country",
             "Other"
-        ]},
-        {"Photography": [
+        ],
+        "Photography": [
             "Places",
             "People"
-        ]},
-        {"Art": [
+        ],
+        "Art": [
             "Sculptures",
             "Paintings",
             "Drawings"
-        ]},
-        {"Travelling": [
+        ],
+        "Travelling": [
             "In the U.S.",
             "Across the globe"
-        ]},
-        {"Cooking": [
+        ],
+        "Cooking": [
             "DIY",
             "Gourmet Recipes"
-        ]},
-        {"Volunteering": [
+        ],
+        "Volunteering": [
             "Red Cross",
             "Community Service"
-        ]},
-        {"Board Games": [
+        ],
+        "Board Games": [
             "Monopoly",
             "Settlers of Catan",
             "Ticket to Ride",
             "Other"
-        ]},
-        {"Gardening": [
+        ],
+        "Gardening": [
             "Flowers",
             "Trees",
             "Other"            
-        ]},
-        {"TV Shows": [
+        ],
+        "TV Shows": [
             "Documentaries",
             "K-Drama",
             "Reality TV",
             "Action",
             "Other"
-        ]},
-        {"Drawing": [
+        ],
+        "Drawing": [
             "Coloring",
             "Sketching"            
-        ]},
-        {"Exercise": [
+        ],
+        "Exercise": [
             "Lifting",
             "Running",
             "Athletics (sports)"
-        ]}
-    ]
+        ]
+    }
 }
