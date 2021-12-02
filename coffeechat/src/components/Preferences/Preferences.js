@@ -37,7 +37,7 @@ let savePreferences = async (username, preferenceState) => {
 
 function Preferences({userObject}) {
     let username = userObject['username']
-    let [preferenceState, setPreferenceState] = useState(getPreferenceState(preferences))
+    let [preferenceState, setPreferenceState] = useState(getPreferenceState(username, preferences))
     console.log(preferenceState);
     let updatePreference = (key) => {
         let f = () => {
