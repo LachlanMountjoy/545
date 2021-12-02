@@ -146,7 +146,7 @@ def save_preferences():
     return {'Status': 'Success'}
 
 
-@app.route('/load-prefernces/<username>')
+@app.route('/load-preferences/<username>')
 @cross_origin()
 def load_preferences(username):
     with open('db.json', 'r') as f:

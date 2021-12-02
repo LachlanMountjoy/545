@@ -4,24 +4,29 @@ import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios'
 
 let backend_route = "http://127.0.0.1:8000/"
 
-let getPreferenceState = async (preferencesObject, username) => {
-    let savedPreferencesRequest = axios.get(backend_route+'save-preferences/'+username);
+let getDefaultPreferenceState = (preferencesObject) => {
     let preferenceState = {};
     for(var key of Object.keys(preferencesObject)){
         for(var item of preferencesObject[key]){
             preferenceState[item] = false;
         }
     }
-    let savedPreferences = await savedPreferencesRequest['data']['preferences'];
-    for(var preference of savedPreferences){
-        preferenceState[preference] = true;
-    }
     return preferenceState;
+}
+
+let getSavedPreferences = async (preferenceState, username, setPreferenceState) => {
+    let savedPreferencesRequest = axios.get(backend_route+'load-preferences/'+username);
+    let savedPreferences = await savedPreferencesRequest;
+    let newPreferences = {...savedPreferences};
+    for(var preference of savedPreferences['data']['preferences']){
+        newPreferences[preference] = true;
+    }
+    setPreferenceState(newPreferences);
 }
 
 let savePreferences = async (username, preferenceState) => {
@@ -36,9 +41,16 @@ let savePreferences = async (username, preferenceState) => {
 
 
 function Preferences({userObject}) {
-    let username = userObject['username']
-    let [preferenceState, setPreferenceState] = useState(getPreferenceState(username, preferences))
-    console.log(preferenceState);
+    let username = userObject['username'];
+    let [preferenceState, setPreferenceState] = useState(getDefaultPreferenceState(preferences))
+    let [loadCount, setLoadCount] = useState(0);
+    useEffect(() => {
+        if(loadCount === 0){
+            getSavedPreferences(preferenceState, username, setPreferenceState);
+            setLoadCount(loadCount+1);
+            console.log(preferenceState)
+        }
+    }, [loadCount, preferenceState, username])
     let updatePreference = (key) => {
         let f = () => {
             let newPreferenceState = {...preferenceState};
