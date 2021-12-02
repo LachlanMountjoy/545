@@ -16,6 +16,7 @@ function App() {
   let [userObject, updateUser] = useState({});
   return (
     <Router>
+        <Link to ="/preferences">Preferences</Link>
       <div>
         {
           <Routes>

@@ -17,7 +17,7 @@ let getPreferenceState = async (preferencesObject, username) => {
             preferenceState[item] = false;
         }
     }
-    let savedPreferences = await savedPreferencesRequest;
+    let savedPreferences = await savedPreferencesRequest['data']['preferences'];
     for(var preference of savedPreferences){
         preferenceState[preference] = true;
     }
@@ -49,6 +49,7 @@ function Preferences({userObject}) {
         return f;
     }
     const keys = Object.keys(preferences);
+    
     return (
         <div>
             <FormGroup>
@@ -58,7 +59,7 @@ function Preferences({userObject}) {
                         <h2>{key} Options</h2>
                         
                         {preferences[key].map(option =>
-                            <FormControlLabel control={<Checkbox />} label = {option} onChange={updatePreference(option)} />
+                            <FormControlLabel control={<Checkbox checked={preferenceState[option]}/>} label = {option} onChange={updatePreference(option)}/>
                             )}
                        
                     </div>)
