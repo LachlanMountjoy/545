@@ -9,14 +9,19 @@ import axios from 'axios'
 
 let backend_route = "http://127.0.0.1:8000/"
 
-let getPreferenceState = (preferencesObject) => {
+let getPreferenceState = async (preferencesObject, username) => {
+    let savedPreferencesRequest = axios.get(backend_route+username);
     let preferenceState = {};
     for(var key of Object.keys(preferencesObject)){
         for(var item of preferencesObject[key]){
             preferenceState[item] = false;
         }
     }
-    return preferenceState
+    let savedPreferences = await savedPreferencesRequest['data']['preferences'];
+    for(var preference of savedPreferences){
+        preferenceState[preference] = true;
+    }
+    return preferenceState;
 }
 
 let savePreferences = async (username, preferenceState) => {
@@ -32,7 +37,7 @@ let savePreferences = async (username, preferenceState) => {
 
 function Preferences({userObject}) {
     let username = userObject['username']
-    let [preferenceState, setPreferenceState] = useState(getPreferenceState(preferences))
+    let [preferenceState, setPreferenceState] = useState(getPreferenceState(username, preferences))
     console.log(preferenceState);
     let updatePreference = (key) => {
         let f = () => {
@@ -44,7 +49,7 @@ function Preferences({userObject}) {
         return f;
     }
     const keys = Object.keys(preferences);
-    const checks = [<Checkbox />, <Checkbox defaultChecked />]
+    
     return (
         <div>
             <FormGroup>
@@ -54,7 +59,7 @@ function Preferences({userObject}) {
                         <h2>{key} Options</h2>
                         
                         {preferences[key].map(option =>
-                            <FormControlLabel control={checks[preferenceState[option]]} label = {option} onChange={updatePreference(option)}/>
+                            <FormControlLabel control={<Checkbox checked={preferenceState[option]}/>} label = {option} onChange={updatePreference(option)}/>
                             )}
                        
                     </div>)
