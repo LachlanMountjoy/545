@@ -1,19 +1,32 @@
 {
     "preferences": {
-        "Movies": [
+        "Time": [
+            "Morning (8AM-11AM)",
+            "Afternoon (12PM-3PM)",
+            "Night (4PM-7PM)"
+        ],
+        "Location": [
+            "Kung Fu Tea (536 Washington St)",
+            "Gong Cha (527 Washington St)",
+            "Jefferson's Coffee (534 Washington St)",
+            "Bwe Kafe (1002 Washington St)",
+            "Dunkin Donuts (700 Washington St)",
+            "Starbucks (314 Washington St)"
+        ],
+        "Movie": [
             "Marvel",
             "Romantic Comedy",
             "Historical"
             
         ],
-        "Video Games": [
+        "Video Game": [
             "Action and Adventure",
             "Shooters",
             "MOBA",
             "Party games"
             
         ],
-        "Sports": [
+        "Sport": [
             "Team (Basketball, Football)",
             "Individual (Track & Field, Swimming)",
             "Olympics"
@@ -45,7 +58,7 @@
             "Red Cross",
             "Community Service"
         ],
-        "Board Games": [
+        "Board Game": [
             "Monopoly",
             "Settlers of Catan",
             "Ticket to Ride"
@@ -54,7 +67,7 @@
             "Flowers",
             "Trees"           
         ],
-        "TV Shows": [
+        "TV Show": [
             "Documentaries",
             "K-Drama",
             "Reality TV",
