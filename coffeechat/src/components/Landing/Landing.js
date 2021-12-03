@@ -17,10 +17,10 @@ let validateEmail = (email) => {
 };
 
 let createUser = async (username, password, setError, navigate, setUserObject) => {
-  if (!validateEmail(username)) {
-    setError("Email is not a proper email address")
-    return;
-  }
+//  if (!validateEmail(username)) {
+//    setError("Email is not a proper email address")
+//    return;
+//  }
   let signup_route = backend_route + 'sign-up';
   let signup_result = await axios.post(signup_route,
              {
@@ -37,10 +37,10 @@ let createUser = async (username, password, setError, navigate, setUserObject) =
 }
 
 let login = async (username, password, setError, navigate, setUserObject) => {
-  if (!validateEmail(username)) {
-    setError("Email is not a proper email address")
-    return;
-  }
+//  if (!validateEmail(username)) {
+//    setError("Email is not a proper email address")
+//    return;
+//  }
   let login_route = backend_route + 'login';
   let login_result = await axios.post(login_route,
              {
