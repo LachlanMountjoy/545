@@ -8,7 +8,19 @@ import NavBar from '../NavBar/NavBar.js';
 
 let backend_route = "http://127.0.0.1:8000/"
 
+let validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
 let createUser = async (username, password, setError, navigate, setUserObject) => {
+  if (!validateEmail(username)) {
+    setError("Email is not a proper email address")
+    return;
+  }
   let signup_route = backend_route + 'sign-up';
   let signup_result = await axios.post(signup_route,
              {
@@ -25,7 +37,10 @@ let createUser = async (username, password, setError, navigate, setUserObject) =
 }
 
 let login = async (username, password, setError, navigate, setUserObject) => {
-
+  if (!validateEmail(username)) {
+    setError("Email is not a proper email address")
+    return;
+  }
   let login_route = backend_route + 'login';
   let login_result = await axios.post(login_route,
              {
