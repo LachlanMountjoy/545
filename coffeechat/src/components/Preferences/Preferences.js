@@ -41,7 +41,7 @@ let savePreferences = async (username, preferenceState) => {
 }
 
 
-function Preferences({userObject}) {
+function Preferences({userObject, setCookie}) {
     let username = userObject['username'];
     let [preferenceState, setPreferenceState] = useState(getDefaultPreferenceState(preferences))
     let [loadCount, setLoadCount] = useState(0);
@@ -64,7 +64,7 @@ function Preferences({userObject}) {
     const keys = Object.keys(preferences);
     return (
         <div>
-            <NavBar />
+            <NavBar setCookie={setCookie}/>
             <FormGroup>
             <div className="Preferences">
                 {keys.map(key =>

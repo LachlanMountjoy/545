@@ -12,19 +12,18 @@ let getMeeting = async (setMeetings, username) => {
     setMeetings(meetings['data']['meetings']);
 }
 
-function Dashboard({userObject}){
+function Dashboard({userObject, setCookie}){
     let [meetings, setMeetings] = useState(null);
     useEffect(() => {
         if(meetings === null){
             getMeeting(setMeetings, userObject['username']);
         }
     }, [meetings, userObject])
-
     if(meetings && meetings.length !== 0){
         return (
             // Iterate over the userObject's meeting field to display all the meetings for a User
             <div>
-                <NavBar />
+                <NavBar setCookie={setCookie} />
                 <div className="Meetings">
                     {meetings.map(meeting => 
                     (<div className="individualMeeting">

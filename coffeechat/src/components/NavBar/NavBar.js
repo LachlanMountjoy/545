@@ -6,7 +6,9 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+import Button from '@mui/material/Button';
+import { Link, useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -21,28 +23,47 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "white",
     fontSize: "20px",
-    marginLeft: theme.spacing(20),
+    marginRight: theme.spacing(5),
     "&:hover": {
       color: "yellow",
       borderBottom: "1px solid white",
     },
   },
+  logout: {
+     marginLeft: theme.spacing(20),
+  },
+  title: {
+    color: "white",
+    textDecoration: "none",
+  }
 }));
 
 function NavBar() {
   const classes = useStyles();
-
+  const [cookies, setCookie] = useCookies(['username'])
+  let navigate = useNavigate();
+  let logout = () => {
+    setCookie('username', '', {path:'/'});
+    navigate('/')
+  };
   return (
     <AppBar position="static">
       <CssBaseline />
       <Toolbar>
         <Typography variant="h4" className={classes.logo}>
-          CoffeeChat
+          <Link to='/meetings' className={classes.title}> CoffeeChat </Link>
         </Typography>
           <div className={classes.navlinks}>
             <Link to="/preferences" className={classes.link}>
               Preferences
             </Link>
+            <Link to="/icebreakers" className={classes.link}>
+              Icebreakers
+            </Link>
+            <Link to="/meetings" className={classes.link}>
+              Meetings
+            </Link>
+            <Button className={classes.logout} variant='contained' onClick={logout}> Log Out </Button>
           </div>
       </Toolbar>
     </AppBar>

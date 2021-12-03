@@ -19,7 +19,7 @@ let createUser = async (username, password, setError, navigate, setUserObject) =
   if (signup_result['data']['Error']) {
    setError(signup_result['data']['Error']);
   } else {
-    setUserObject({'username': username})
+    setUserObject('username', username, {path: '/'})
     navigate('/preferences', { replace: true })
   }
 }
@@ -36,7 +36,7 @@ let login = async (username, password, setError, navigate, setUserObject) => {
   if (login_result['data']['Error']) {
    setError(login_result['data']['Error']);
   } else {
-    setUserObject({'username': username})
+    setUserObject('username', username, {path: '/'})
     navigate('/meetings', { replace: true })
   }
 
@@ -50,7 +50,6 @@ function Landing({setUserObject}) {
   return (
     <div className="Landing">
       <div className="background"> </div>
-      <NavBar />
       <div className="form-container">
         <h1>Coffee Chat</h1>
         <p hidden className="error">{"Invalid username or password input"} </p>
