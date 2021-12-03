@@ -113,7 +113,7 @@ def match_people(username):
     msg['Subject'] = 'Your CoffeeChat Meeting is Ready!'
     msg['From'] = "stevenscoffeechat@gmail.com"
     msg['To'] = ",".join(recipients)
-    body = "Hello! The details of your meeting are now available: http://localhost:127.0.0.1"
+    body = "Hello! The details of your meeting are now available: http://localhost:3000"
     msg.attach(MIMEText(body, 'plain'))
     with smtplib.SMTP('localhost') as s:
         s.sendmail(sender, recipients, msg.as_string())
