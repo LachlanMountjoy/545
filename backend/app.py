@@ -94,6 +94,10 @@ def match_people(username):
             del meeting_queue[i]
             break
     if not meeting_person:
+        meeting_queue.append(user)
+        db['meeting_queue'] = meeting_queue
+        with open('db.json', 'w') as f:
+            db = json.dump(db, f)
         return {"Status": "Unable to find meeting"}
     meeting_id = random.randint(0, 100000000)
     meeting_person['meetings'].append(meeting_id)
