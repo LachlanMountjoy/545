@@ -30,6 +30,7 @@ function Dashboard({userObject, setCookie}){
         let username = userObject['username']
         axios.get(backend_route + `match-people/${username}`)
         setMeetings(null);
+        alert("Request Received. You will be notified by email when a new meeting is found. See you then!");
     }
     if(meetings && meetings.length !== 0){
         return (
@@ -37,11 +38,11 @@ function Dashboard({userObject, setCookie}){
             <div className="Dashboard">
                 <NavBar setCookie={setCookie} />
                 <div className="schedule-meeting"><Button variant="contained" onClick={scheduleMeeting}>Schedule Meeting</Button></div>
-                    {meetings.map(meeting =>
+                    {meetings.map((meeting, index) =>
                     ( 
                      <Accordion> 
-                        <AccordionSummary aria-controls="panella-content" id={meeting.id} expandIcon={<ExpandMoreIcon />}>
-                            <Typography> Meeting {meeting.id} </Typography>
+                        <AccordionSummary aria-controls="panella-content" id={index+1} expandIcon={<ExpandMoreIcon />}>
+                            <Typography> Meeting {index+1} ({meeting.date})</Typography>
                         </AccordionSummary>
                     <AccordionDetails> 
                     <h3 className="date">Date:</h3>
