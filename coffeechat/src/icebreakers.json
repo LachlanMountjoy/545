@@ -3,13 +3,36 @@
         "Funny": [
             "What is one article of clothing that someone could wear that would make you walk out on a date with them?",
             "What was the worst style choice you ever made?",
-            "What was the worst haircut you ever had?"
+            "What was the worst haircut you ever had?", 
+            "Who was your childhood actor/actress crush?"
         ],
         "Random": [
-            "The zombie apocalypse is coming, who are 3 people you want on your team?"
+            "The zombie apocalypse is coming, who are 3 people you want on your team?",
+            "What is your favorite item you’ve bought this year?", 
+            "What is your earliest holiday memory?",
+            "Which of Scrooge’s ghosts was the most effective?", 
+            "If you had to delete all but 3 apps from your smartphone, which ones would you keep?"
         ],
         "Personal": [
-            "What is your most used emoji?"
+            "What is your most used emoji?",
+			"Are you an early bird or night owl?",
+			"What’s your caffeinated beverage of choice?", 
+			"Best book you’ve ever read?"
+        ],
+        "Would you rather": [
+			"Would you rather live in the ocean or on the moon?",
+			"Would you rather lose all of your money or all of your pictures?",
+			"Would you rather be able to run at 100 miles per hour or fly at 10 miles per hour?",
+			"Would you rather be the funniest or smartest person in the room?",
+			"Would you rather have invisibility or flight?",
+			"Would you rather always be slightly late or super early?"
+        ], 
+        "School": [
+        	"If you couldnt do your current major, what would your major be?",
+        	"What most surprised you when you first arrived on campus or first started classes at this school?",
+        	"What is the strangest habit you have?", 
+        	"Describe the best teacher you have had so far.", 
+        	"Name an imaginary college class you wish this school offered."
         ]
     }
 }
