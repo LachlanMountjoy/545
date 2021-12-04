@@ -4,6 +4,7 @@ import NavBar from '../NavBar/NavBar.js';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../../styles/dashboard.css';
@@ -17,6 +18,7 @@ let getMeeting = async (setMeetings, username) => {
     setMeetings(meetings['data']['meetings']);
 }
 
+
 function Dashboard({userObject, setCookie}){
     let [meetings, setMeetings] = useState(null);
     useEffect(() => {
@@ -24,12 +26,18 @@ function Dashboard({userObject, setCookie}){
             getMeeting(setMeetings, userObject['username']);
         }
     }, [meetings, userObject])
+    let scheduleMeeting = async () => {
+        let username = userObject['username']
+        axios.get(backend_route + `match-people/${username}`)
+        setMeetings(null);
+    }
     if(meetings && meetings.length !== 0){
         return (
             // Iterate over the userObject's meeting field to display all the meetings for a User
             <div className="Dashboard">
                 <NavBar setCookie={setCookie} />
-                    {meetings.map(meeting => 
+                <div className="schedule-meeting"><Button variant="contained" onClick={scheduleMeeting}>Schedule Meeting</Button></div>
+                    {meetings.map(meeting =>
                     ( 
                      <Accordion> 
                         <AccordionSummary aria-controls="panella-content" id={meeting.id} expandIcon={<ExpandMoreIcon />}>
@@ -57,7 +65,12 @@ function Dashboard({userObject, setCookie}){
         );
     }
     else{
-        return (<div><NavBar /><p>Currently no meetings scheduled!</p></div>)
+        return (<div>
+                  <NavBar />
+                <div className="schedule-meeting"><Button variant="contained" onClick={scheduleMeeting}>Schedule Meeting</Button></div>
+
+                  <p>Currently no meetings scheduled!</p>
+                </div>)
     }
 }
 

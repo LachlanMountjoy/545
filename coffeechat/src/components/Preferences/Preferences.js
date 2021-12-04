@@ -32,7 +32,7 @@ let getSavedPreferences = async (preferenceState, username, setPreferenceState) 
 }
 
 let savePreferences = async (username, preferenceState) => {
-    let save_route = backend_route + 'save-prefernces';
+    let save_route = backend_route + 'save-preferences';
     let save_result = await axios.post(save_route,
              {
                username: username,
@@ -40,7 +40,6 @@ let savePreferences = async (username, preferenceState) => {
              });
     return save_result
 }
-
 
 function Preferences({userObject, setCookie}) {
     let username = userObject['username'];
