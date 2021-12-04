@@ -15,7 +15,7 @@ function IceBreakers({userObject, setCookie}) {
         <NavBar setCookie={setCookie}/>
         {icebreakerTopics.map(topic => 
             <Accordion>
-              <AccordionSummary aria-controls="panella-content" id={topic} expandIcon={<ExpandMoreIcon />}>
+              <AccordionSummary aria-controls="panella-content"  id={topic} expandIcon={<ExpandMoreIcon />}>
                 <Typography>{topic} Icebreakers</Typography>
               </AccordionSummary>
               <AccordionDetails>

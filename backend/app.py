@@ -10,7 +10,8 @@ from email.mime.multipart import MIMEMultipart
 app = Flask(__name__)
 CORS(app)
 
-
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+request_params = ['data', 'status', 'statusText', 'headers', 'config', 'request']
 @app.route('/sign-up', methods=['POST'])
 @cross_origin()
 def sign_up():
@@ -58,27 +59,32 @@ def login():
 def is_compatible(user, person):
     user_prefs = set(user['preferences'])
     user_avail = set(user['availability'])
-    user_coffeshops = set(user['coffeeshops'])
+    user_coffeeshops = set(user['coffeeshops'])
     person_prefs = set(person['preferences'])
-    person_avail = set(person['avail'])
+    person_avail = set(person['availability'])
     person_coffeeshops = set(person['coffeeshops'])
-    return (user_prefs.union(person_prefs)
-            and user_avail.union(person_avail)
-            and user_coffeshops.union(person_coffeeshops))
+    return (user_prefs.intersection(person_prefs)
+            and user_avail.intersection(person_avail)
+            and user_coffeeshops.intersection(person_coffeeshops))
 
 
 def create_meeting(meeting_id, user1, user2):
-    pref_union = set(user1['preferences']).union(set(user2['preferences']))
-    dates = list(set(user1['availability']).union(set(user2['availability'])))
-    coffeshops = list(set(user1['coffeshops']).union(set(user2['coffeshops'])))
+    shared_prefs = set(user1['preferences']).intersection(set(user2['preferences']))
+    times = list(set(user1['availability']).intersection(set(user2['availability'])))
+    coffeeshops = list(set(user1['coffeeshops']).intersection(set(user2['coffeeshops'])))
     return {
         'id': meeting_id,
-        'people': [user1, user2],
-        'shared_preferences': list(pref_union),
-        'date': random.choice(dates),
-        'coffeeshop': random.choice(coffeshops)
+        'people': [user1['username'], user2['username']],
+        'shared_preferences': list(shared_prefs),
+        'date': f'{random.choice(days)} {random.choice(times)}',
+        'coffeeshop': random.choice(coffeeshops)
     }
 
+def scheduled_meeting(user, meeting_queue):
+    has_scheduled = False
+    for person in meeting_queue:
+        has_scheduled |= user['username'] == person['username']
+    return has_scheduled
 
 @app.route('/match-people/<username>')
 @cross_origin()
@@ -88,24 +94,25 @@ def match_people(username):
     user = db['users'][username]
     meeting_queue = db['meeting_queue']
     meeting_person = None
-    for i, person in meeting_queue:
-        if is_compatible(user, person):
+    for i, person in enumerate(meeting_queue):
+        if is_compatible(user, person) and person['username'] != user['username']:
             meeting_person = person
             del meeting_queue[i]
             break
     if not meeting_person:
-        meeting_queue.append(user)
-        db['meeting_queue'] = meeting_queue
-        with open('db.json', 'w') as f:
-            db = json.dump(db, f)
+        if not scheduled_meeting(user, meeting_queue):
+            meeting_queue.append(user)
+            db['meeting_queue'] = meeting_queue
+            with open('db.json', 'w') as f:
+                db = json.dump(db, f)
         return {"Status": "Unable to find meeting"}
     meeting_id = random.randint(0, 100000000)
     meeting_person['meetings'].append(meeting_id)
     user['meetings'].append(meeting_id)
-    db['user'][username] = user
-    db['user'][meeting_person['username']] = meeting_person
+    db['users'][username] = user
+    db['users'][meeting_person['username']] = meeting_person
     db['meeting_queue'] = meeting_queue
-    meeting = create_meeting(meeting_id)
+    meeting = create_meeting(meeting_id, user, meeting_person)
     db['meetings'].append(meeting)
     sender = 'stevenscoffeechat@gmail.com'
     recipients = meeting['people']
@@ -115,7 +122,9 @@ def match_people(username):
     msg['To'] = ",".join(recipients)
     body = "Hello! The details of your meeting are now available: http://localhost:3000"
     msg.attach(MIMEText(body, 'plain'))
-    with smtplib.SMTP('localhost') as s:
+    with smtplib.SMTP('smtp.gmail.com', 587) as s:
+        s.ehlo()
+        s.login('stevenscoffeechat@gmail.com', '')
         s.sendmail(sender, recipients, msg.as_string())
     with open('db.json', 'w') as f:
         db = json.dump(db, f)
@@ -135,16 +144,32 @@ def get_meetings(username):
                 meeting_details.append(meeting)
     return {'meetings': meeting_details}
 
+def extract_preferences(preferences):
+    with open('../coffeechat/src/preferences.json', 'r') as f:
+        all_preferences = json.load(f)['preferences']
+    preferences = set(preferences)
+    times = set(all_preferences['Time'])
+    locations = set(all_preferences['Location'])
+    availability = preferences.intersection(times)
+    coffeeshops = preferences.intersection(locations)
+    preferences = preferences - availability
+    preferences = preferences - coffeeshops
+    return list(preferences), list(availability), list(coffeeshops)
 
 @app.route('/save-preferences', methods=['POST'])
 @cross_origin()
 def save_preferences():
     username = request.json['username']
     preferences = request.json['preferences']
+    print(preferences)
     preference_list = [key for key, val in preferences.items() if val]
+    preference_list = list(filter(lambda x: x not in request_params, preference_list))
+    preference_list, availability, coffeeshops = extract_preferences(preference_list)
     with open('db.json', 'r') as f:
         db = json.load(f)
     db['users'][username]['preferences'] = preference_list
+    db['users'][username]['availability'] = availability
+    db['users'][username]['coffeeshops'] = coffeeshops
     with open('db.json', 'w') as f:
         db = json.dump(db, f)
     return {'Status': 'Success'}
@@ -155,7 +180,10 @@ def save_preferences():
 def load_preferences(username):
     with open('db.json', 'r') as f:
         db = json.load(f)
-    return {'preferences': db['users'][username]['preferences']}
+    preferences = db['users'][username]['preferences']
+    preferences.extend(db['users'][username]['availability'])
+    preferences.extend(db['users'][username]['coffeeshops'])
+    return {'preferences': preferences}
 
 
 if __name__ == '__main__':

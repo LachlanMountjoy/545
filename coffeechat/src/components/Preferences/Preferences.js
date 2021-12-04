@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import {useState, useEffect} from 'react';
 import axios from 'axios'
 import NavBar from '../NavBar/NavBar.js';
+import Container from '@mui/material/Container';
 
 let backend_route = "http://127.0.0.1:8000/"
 
@@ -31,7 +32,7 @@ let getSavedPreferences = async (preferenceState, username, setPreferenceState) 
 }
 
 let savePreferences = async (username, preferenceState) => {
-    let save_route = backend_route + 'save-prefernces';
+    let save_route = backend_route + 'save-preferences';
     let save_result = await axios.post(save_route,
              {
                username: username,
@@ -39,7 +40,6 @@ let savePreferences = async (username, preferenceState) => {
              });
     return save_result
 }
-
 
 function Preferences({userObject, setCookie}) {
     let username = userObject['username'];
@@ -63,24 +63,23 @@ function Preferences({userObject, setCookie}) {
     }
     const keys = Object.keys(preferences);
     return (
-        <div>
+        <div className="Preferences"> 
             <NavBar setCookie={setCookie}/>
+            <Container>
             <FormGroup>
-            <div className="Preferences">
                 {keys.map(key =>
                     (<div>
-                        <h2>{key} Options</h2>
-                        
-                        {preferences[key].map(option =>
-                            <FormControlLabel control={<Checkbox checked={preferenceState[option]}/>} label = {option} onChange={updatePreference(option)}/>
-                            )}
-                       
+                        <h2>{key} Options</h2> 
+                        {preferences[key].map(option => 
+                            <FormControlLabel className="fcl" control={<Checkbox checked={preferenceState[option]}/>} label = {option} onChange={updatePreference(option)}/>                 
+                            )}                
                     </div>)
                 )}
-            </div>
             </FormGroup>
-            <Button onClick={() => {savePreferences(username, preferenceState)}}>Save</Button>
+            <Button variant="contained" onClick={() => {savePreferences(username, preferenceState)}}>Save</Button>
+            </Container>
         </div>
+   
     );
   }
   

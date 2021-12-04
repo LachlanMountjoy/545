@@ -1,0 +1,14 @@
+.data, .meeting-date{
+   display:inline;
+}
+
+.location, .meeting-location{
+    display:inline;
+}
+
+.schedule-meeting{
+    display:flex;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

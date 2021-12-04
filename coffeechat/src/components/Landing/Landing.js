@@ -66,29 +66,24 @@ function Landing({setUserObject}) {
     <div className="Landing">
       <div className="background"> </div>
       <div className="form-container">
-        <h1>Coffee Chat</h1>
-        <p hidden className="error">{"Invalid username or password input"} </p>
+        <h1 className="coffeechat-title">Coffee Chat</h1>
       <form>
         <div className="form-group">
-          <label>
+          <label className="landing-label">
             Email
             <input type="text" name="name" placeholder="email" onChange={e => setUsername(e.target.value)}/>
           </label>
         </div>
         <div className="form-group">
-        <label>
+        <label className="landing-label">
             Password
             <input type='password' name='password' placeholder="password" onChange={e => setPassword(e.target.value)}/>
         </label>
         </div>
-        <div className="login">
-        <label>
-          <Button variant="contained" onClick={e => login(username, password, setError, navigate, setUserObject)}>Login</Button>
-        </label>
-        </div>
-        <div className="sign-up">
-          <Button variant="contained" onClick={e => createUser(username, password, setError, navigate, setUserObject)}>Sign Up</Button>
-        </div>
+          <div className="landing-button">
+          <Button variant="contained"  onClick={e => login(username, password, setError, navigate, setUserObject)}>Login</Button>
+          <Button  variant="contained" onClick={e => createUser(username, password, setError, navigate, setUserObject)}>Sign Up</Button>
+          </div>
         {(error) && <div className='error'><p> {error} </p> </div>}
       </form>
     </div>

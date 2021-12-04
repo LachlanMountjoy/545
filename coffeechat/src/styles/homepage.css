@@ -24,7 +24,7 @@ div .background{
 
 }
 
-h1{
+.coffeechat-title{
     text-align: center;
     margin-top: 50px;
     color:white;
@@ -63,7 +63,7 @@ div .form-container{
     width: 50%;
 }
 
-label{
+.landing-label{
     color:white;
     font-family: Aalto;
     font-size: 20px;
@@ -93,20 +93,7 @@ input[type=password]{
     border-radius:8px;
 }
 
-.login{
-    margin-bottom:15px;
-    margin-left: 34%;
-    margin-right:10%;
-    color: white;
-    font-size:20px;
-    font-family: Aalto;
-    font-weight: bold;
-}
 
-.sign-up{
-    text-decoration: none;
-    color: white;
-    font-size: 19.5px;
-    font-family: Aalto;
-    font-weight: bold;
+.landing-button{
+    margin-left:190px;
 }
