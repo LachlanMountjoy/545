@@ -1,0 +1,7 @@
+.data, .meeting-date{
+   display:inline;
+}
+
+.location, .meeting-location{
+    display:inline;
+}

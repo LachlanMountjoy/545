@@ -2,9 +2,7 @@ input[type=checkbox]{
     -webkit-appearance: checkbox;
 }
 
-label {
-    color: black;
-}
-h3 {
-    color: black;
+.fcl{
+    margin-left:30px;
+    margin-right:-10px;
 }

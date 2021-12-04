@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavBar from '../NavBar/NavBar.js';
-
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import '../../styles/dashboard.css';
 
 let backend_route = "http://127.0.0.1:8000/";
 
@@ -22,27 +27,33 @@ function Dashboard({userObject, setCookie}){
     if(meetings && meetings.length !== 0){
         return (
             // Iterate over the userObject's meeting field to display all the meetings for a User
-            <div>
+            <div className="Dashboard">
                 <NavBar setCookie={setCookie} />
-                <div className="Meetings">
                     {meetings.map(meeting => 
-                    (<div className="individualMeeting">
-                    <h2>Meeting {meeting.id}</h2>
-                    <h2>Date: {meeting.date}</h2>
-                    <h2>Location: {meeting.coffeeshop}</h2>
-                    <p>People Involved:</p>
+                    ( 
+                     <Accordion> 
+                        <AccordionSummary aria-controls="panella-content" id={meeting.id} expandIcon={<ExpandMoreIcon />}>
+                            <Typography> Meeting {meeting.id} </Typography>
+                        </AccordionSummary>
+                    <AccordionDetails> 
+                    <h3 className="date">Date:</h3>
+                    <p className="meeting-date"> {meeting.date}</p>
+                    <h3 className="location">Location: </h3>
+                    <p className="meeting-location"> {meeting.coffeeshop}  </p>
+                    <h3> People Involved:</h3>
                     <ul>
                     {meeting.people.map(person =>
                         <li>{person}</li>)}
                     </ul>
-                    <p>Common Preferences:</p>
+                    <h3>Common Preferences:</h3>
                     <ul>
                     {meeting.shared_preferences.map(preference =>
                         <li>{preference}</li>)}
-                    </ul>
-                    </div>))}
-                </div>
-            </div>
+                    </ul> 
+                     </AccordionDetails>
+                     </Accordion> 
+                    ))}
+                </div>    
         );
     }
     else{
