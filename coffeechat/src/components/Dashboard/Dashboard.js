@@ -63,11 +63,11 @@ function Dashboard({userObject, setCookie}){
                     </Alert>
                   </Snackbar>
                 </div>
-                    {meetings.map(meeting =>
-                    ( 
+                    {meetings.map((meeting, index) =>
+                    (
                      <Accordion> 
-                        <AccordionSummary aria-controls="panella-content" id={meeting.id} expandIcon={<ExpandMoreIcon />}>
-                            <Typography> Meeting {meeting.id} </Typography>
+                        <AccordionSummary aria-controls="panella-content" id={index+1} expandIcon={<ExpandMoreIcon />}>
+                            <Typography> Meeting {index+1} ({meeting.date})</Typography>
                         </AccordionSummary>
                     <AccordionDetails> 
                     <h3 className="date">Date:</h3>
