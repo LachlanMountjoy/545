@@ -7,6 +7,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import '../../styles/dashboard.css';
 
 let backend_route = "http://127.0.0.1:8000/";
@@ -18,8 +20,24 @@ let getMeeting = async (setMeetings, username) => {
     setMeetings(meetings['data']['meetings']);
 }
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="success" {...props} />;
+});
 
 function Dashboard({userObject, setCookie}){
+    let [open, setOpen] = React.useState(false);
+
+    let handleClick = () => {
+        setOpen(true);
+    };
+
+    let handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     let [meetings, setMeetings] = useState(null);
     useEffect(() => {
         if(meetings === null){
@@ -30,6 +48,7 @@ function Dashboard({userObject, setCookie}){
         let username = userObject['username']
         axios.get(backend_route + `match-people/${username}`)
         setMeetings(null);
+        handleClick();
     }
     if(meetings && meetings.length !== 0){
         return (
@@ -37,6 +56,13 @@ function Dashboard({userObject, setCookie}){
             <div className="Dashboard">
                 <NavBar setCookie={setCookie} />
                 <div className="schedule-meeting"><Button variant="contained" onClick={scheduleMeeting}>Schedule Meeting</Button></div>
+                <div className="schedule-meeting">
+                  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                      Looking for a meeting!
+                    </Alert>
+                  </Snackbar>
+                </div>
                     {meetings.map(meeting =>
                     ( 
                      <Accordion> 
@@ -61,14 +87,20 @@ function Dashboard({userObject, setCookie}){
                      </AccordionDetails>
                      </Accordion> 
                     ))}
-                </div>    
+            </div>
         );
     }
     else{
         return (<div>
                   <NavBar />
-                <div className="schedule-meeting"><Button variant="contained" onClick={scheduleMeeting}>Schedule Meeting</Button></div>
-
+                  <div className="schedule-meeting"><Button variant="contained" onClick={scheduleMeeting}>Schedule Meeting</Button></div>
+                  <div className="schedule-meeting">
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                      <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Looking for a meeting!
+                      </Alert>
+                    </Snackbar>
+                  </div>
                   <p>Currently no meetings scheduled!</p>
                 </div>)
     }

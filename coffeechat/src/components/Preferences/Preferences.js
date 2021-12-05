@@ -4,12 +4,20 @@ import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import NavBar from '../NavBar/NavBar.js';
 import Container from '@mui/material/Container';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 
 let backend_route = "http://127.0.0.1:8000/"
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="success" {...props} />;
+});
+
 
 let getDefaultPreferenceState = (preferencesObject) => {
     let preferenceState = {};
@@ -42,6 +50,20 @@ let savePreferences = async (username, preferenceState) => {
 }
 
 function Preferences({userObject, setCookie}) {
+    let [open, setOpen] = React.useState(false);
+
+    let handleClick = () => {
+        setOpen(true);
+    };
+
+    let handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
     let username = userObject['username'];
     let [preferenceState, setPreferenceState] = useState(getDefaultPreferenceState(preferences))
     let [loadCount, setLoadCount] = useState(0);
@@ -62,6 +84,7 @@ function Preferences({userObject, setCookie}) {
         return f;
     }
     const keys = Object.keys(preferences);
+
     return (
         <div className="Preferences"> 
             <NavBar setCookie={setCookie}/>
@@ -76,8 +99,16 @@ function Preferences({userObject, setCookie}) {
                     </div>)
                 )}
             </FormGroup>
-            <Button variant="contained" onClick={() => {savePreferences(username, preferenceState)}}>Save</Button>
+              <Button variant="contained" onClick={() => {savePreferences(username, preferenceState); handleClick()}}>Save</Button>
             </Container>
+                <div className="schedule-meeting">
+                  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                      Saved Preferences!
+                    </Alert>
+                  </Snackbar>
+                </div>
+
         </div>
    
     );
